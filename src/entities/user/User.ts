@@ -21,8 +21,8 @@ export class UserEntity extends Model<UserEntity> {
 
     @Column({
         field:'avatar',
-        allowNull:false,
-        type:DataType.STRING(20)
+        allowNull:true,
+        type:DataType.STRING(255)
     })
     avatar: string;
 
@@ -42,21 +42,21 @@ export class UserEntity extends Model<UserEntity> {
 
     @Column({
       field:'own_name',
-      allowNull:false,
+      allowNull:true,
       type:DataType.STRING(50)
     })
     ownName: string;
 
     @Column({
       field:'gender',
-      allowNull:false,
+      allowNull:true,
       type:DataType.STRING(50)
     })
     gender: string;
     
     @Column({
       field:'date_of_birth',
-      allowNull:true,
+      allowNull:false,
       type:DataType.STRING
     })
     dateOfBirth: string;

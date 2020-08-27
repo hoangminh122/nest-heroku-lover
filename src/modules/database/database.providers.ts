@@ -25,7 +25,7 @@ export const databaseProvider = {
 
     const sequelize = new Sequelize({ ...config });
     sequelize.addModels([UserEntity,FileEntity,UserFile]);
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     return sequelize;
   },
 };

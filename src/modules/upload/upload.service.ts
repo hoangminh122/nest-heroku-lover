@@ -37,7 +37,9 @@ export class UploadService {
             console.log(files.id);
             //set idFile default
             idFile.id = [];
-            return files.id;
+            return {
+              id:files.id
+            };
       
           } catch (e) {
             idFile.id = [];

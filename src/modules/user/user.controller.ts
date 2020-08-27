@@ -10,8 +10,16 @@ export class UserController {
 
     @Get()
     getAllUser() {
+        console.log("ok")
         return this.userService.showAll();
     }
+
+    @Get('/test')
+    getAllUsers() {
+        console.log("ok")
+        return {minh:"agshg"};
+    }
+
 
     @Get('GetById/:id')
     showUserById(@Param('id') id: string) {

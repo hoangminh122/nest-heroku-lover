@@ -10,6 +10,7 @@ export class UploadController {
         private uploadService: UploadService,
     ) { }
 
+    
     @Post()
     @ApiConsumes('multipart/form-data')
     @ApiBody({

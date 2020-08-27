@@ -14,12 +14,18 @@ export class UserDTO {
     @ApiProperty()
     @IsOptional()
     @IsString()
-    ownName: string;
+    ownName?: string;
 
     @ApiProperty()
     @IsOptional()
     @IsString()
-    gender: string;
+    gender?: string;
+
+    // @ApiProperty()
+    @IsOptional()
+    @IsString()
+    avatar?: string;
+
 
     @ApiProperty()
     @IsOptional()

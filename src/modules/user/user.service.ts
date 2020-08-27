@@ -70,4 +70,8 @@ export class UserService {
         return { deleted: true };
     }
 
+    async saveAvatar() {
+
+    }
+
 }
