@@ -1,33 +1,31 @@
 import { UUIDV4 } from 'sequelize';
-import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
+import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany, ForeignKey } from 'sequelize-typescript';
 import { UserEntity } from '../user/User';
-import { UserFile } from '../user/UserFile';
 
 @Table({
-  tableName: 'files',
+  tableName: 'contents',
   timestamps: false ,
   
 })
-export class FileEntity extends Model<FileEntity> {
-    @IsUUID(4)
+export class ContentEntity extends Model<ContentEntity> {
     @PrimaryKey
     @Column({
-        type:DataType.UUID,
-        defaultValue: UUIDV4,
+        type:DataType.BIGINT,
     })
     id?: string;
 
-    @Column({ allowNull: false, type: DataType.STRING(255) })
-    originalName?: string;
+    @ForeignKey(() =>UserEntity)
+    @Column({
+        type:DataType.UUID,
+        defaultValue:UUIDV4
+    })
+    userId!:string
+    @Column({ allowNull: true, type: DataType.STRING(255) })
+    title?: string;
 
     @Column({ allowNull: true, type: DataType.STRING(255) })
-    fileName?: string;
+    content?: string;
 
-    @Column({ allowNull: true, type: DataType.INTEGER })
-    size?: string;
-
-    @Column({ allowNull: true, type: DataType.STRING(255) })
-    url?: string;
 
     @Column({
         field: 'created_at',
@@ -47,7 +45,8 @@ export class FileEntity extends Model<FileEntity> {
     })
     updatedAt?: Date;
 
-    @BelongsToMany(() => UserEntity,() => UserFile)
-    users?: UserEntity[];
+    // @BelongsToMany(() => UserEntity,'userId')
+    // public user:UserEntity
+   
 
 }

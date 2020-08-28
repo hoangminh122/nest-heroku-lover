@@ -28,7 +28,7 @@ import { UserEntity } from './User';
     userId!: string;
   
     @Column({ allowNull: true, type: DataType.STRING(255) })
-    content?: string;
+    description?: string;
 
     // @BelongsTo(() => FileEntity, {
     //   constraints: false,

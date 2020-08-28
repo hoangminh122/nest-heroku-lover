@@ -1,5 +1,6 @@
 import { UUIDV4 } from 'sequelize';
 import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
+import { ContentEntity } from '../file/Content';
 import { FileEntity } from '../file/Files';
 import { UserFile } from './UserFile';
 
@@ -86,5 +87,8 @@ export class UserEntity extends Model<UserEntity> {
     
     @BelongsToMany(() => FileEntity,() => UserFile)
     files?: FileEntity[];
+
+    @HasMany(() => ContentEntity,'userId')
+    contents: ContentEntity[];
 
 }

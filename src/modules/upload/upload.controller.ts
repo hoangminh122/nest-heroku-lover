@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Post, Put, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post, Put, UploadedFiles, UseInterceptors } from "@nestjs/common";
 import { FilesInterceptor } from "@nestjs/platform-express/multer/interceptors/files.interceptor";
 import { ApiBody, ApiConsumes } from "@nestjs/swagger";
 import { UploadService } from "./upload.service";
 import { multerOptions } from "./config";
+
 
 @Controller('upload')
 export class UploadController {
@@ -25,8 +26,9 @@ export class UploadController {
         },
     })
     @UseInterceptors(FilesInterceptor('files', null, multerOptions))
-    async uploadFile(@UploadedFiles() file) {
-        // console.log(file)
+    async uploadFile(@UploadedFiles() file,@Body() userId:any) {
+        console.log(file)
+        console.log(userId)
         return await this.uploadService.saveFile(file);
     }
 
@@ -70,6 +72,16 @@ export class UploadController {
     @Get('getUrlFile/:id')
     async getUrlavatar(@Param('id') id: String) {
         return await this.uploadService.getFile(id);
+    }
+    @Get('delFile/:id')
+    async removeFile(@Param('id') id: string) {
+       return await this.uploadService.removeFile(id);
+        
+    }
+
+    @Post()
+    saveContent(@Body() content){
+
     }
 
 }

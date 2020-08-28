@@ -1,5 +1,6 @@
 
 import { Sequelize } from 'sequelize-typescript';
+import { ContentEntity } from 'src/entities/file/Content';
 import { FileEntity } from 'src/entities/file/Files';
 import { UserFile } from 'src/entities/user/UserFile';
 import { UserEntity } from '../../entities/user/User';
@@ -24,7 +25,7 @@ export const databaseProvider = {
     }
 
     const sequelize = new Sequelize({ ...config });
-    sequelize.addModels([UserEntity,FileEntity,UserFile]);
+    sequelize.addModels([UserEntity,FileEntity,UserFile,ContentEntity]);
     await sequelize.sync({ force: false });
     return sequelize;
   },
