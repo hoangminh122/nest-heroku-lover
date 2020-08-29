@@ -10,13 +10,13 @@ export class UserController {
 
     @Get()
     getAllUser() {
-        console.log("ok")
+        // console.log("ok")
         return this.userService.showAll();
     }
 
     @Get('/test')
     getAllUsers() {
-        console.log("ok")
+        // console.log("ok")
         return {minh:"agshg"};
     }
 

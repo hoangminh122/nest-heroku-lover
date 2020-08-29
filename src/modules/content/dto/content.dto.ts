@@ -19,7 +19,7 @@ export class ContentDTO {
     @ApiProperty()
     @IsOptional()
     @IsString()
-    day: string;
+    day?: string;
 
     
 }

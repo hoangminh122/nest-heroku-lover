@@ -25,7 +25,7 @@ export class UploadService {
               fileName: file[0].fieldname,
               size: file[0].size
             }
-            console.log(dataFile)
+            // console.log(dataFile)
             const files = await this.fileRepository.create(dataFile);
             if (!files) {
               throw new HttpException(
@@ -36,11 +36,11 @@ export class UploadService {
                 HttpStatus.BAD_REQUEST
               );
             }
-            console.log(files.id);
+            // console.log(files.id);
             //set idFile default
             idFile.id = [];
             return {
-                avatarPath:files.originalName
+                avatarPath:await files.originalName
             };
 
           } catch (e) {
@@ -56,26 +56,28 @@ export class UploadService {
   }
 
 
-  async saveFile(file,userId) {
+  async saveFile(file,userId,day) {
     try {
         let result = await idFile.id.map(async(value,index)=>{
             let dataFiles = [];
            let dataFile ={
                 originalName: value,
                 fileName: file[index].fieldname,
-                size: file[index].size
+                size: file[index].size,
+                day:day
               };
               const files = await this.fileRepository.create(dataFile)
               .then((value)=>{
-                console.log(dataFiles)
+                // console.log(dataFiles)
                 let userFileData = {
                   userId:userId,
                   fileId:value.id,
-                  description:''
+                  description:'',
                 }
                 this.userFileService.saveFile(userFileData);
               })
               .catch((e)=>{
+                console.log(e)
                 throw new HttpException(
                       {
                           status: HttpStatus.BAD_REQUEST,
@@ -98,7 +100,7 @@ export class UploadService {
                 return 1;
 
         });
-        console.log(result)
+        // console.log(result)
       //set idFile default
       idFile.id = [];
       return {

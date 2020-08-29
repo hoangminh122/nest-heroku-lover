@@ -18,7 +18,7 @@ export class FileDTO {
 
     @ApiProperty()
     @IsOptional()
-    day: number;
+    day?: number;
 
     @ApiProperty()
     @IsOptional()
