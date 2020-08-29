@@ -11,6 +11,8 @@ export class ContentEntity extends Model<ContentEntity> {
     @PrimaryKey
     @Column({
         type:DataType.BIGINT,
+        autoIncrement:true,
+        // primaryKey:true
     })
     id?: string;
 
@@ -26,6 +28,8 @@ export class ContentEntity extends Model<ContentEntity> {
     @Column({ allowNull: true, type: DataType.STRING(255) })
     content?: string;
 
+    @Column({ allowNull: false, type: DataType.BIGINT })
+    day: number;
 
     @Column({
         field: 'created_at',

@@ -8,6 +8,8 @@ import { UserModule } from './modules/user/user.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MulterModule } from '@nestjs/platform-express/multer/multer.module';
+import { UserFileModule } from './modules/user_file/user_file.module';
+import { ContentModule } from './modules/content/content.module';
 
 @Module({
  
@@ -21,7 +23,9 @@ import { MulterModule } from '@nestjs/platform-express/multer/multer.module';
     FileModule,
     UserModule,
     FileModule,
-    UploadModule
+    UploadModule,
+    UserFileModule,
+    ContentModule
   ],
 })
 export class AppModule {}

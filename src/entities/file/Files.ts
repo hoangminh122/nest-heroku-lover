@@ -23,6 +23,9 @@ export class FileEntity extends Model<FileEntity> {
     @Column({ allowNull: true, type: DataType.STRING(255) })
     fileName?: string;
 
+    @Column({ allowNull: false, type: DataType.BIGINT })
+    day: number;
+
     @Column({ allowNull: true, type: DataType.INTEGER })
     size?: string;
 

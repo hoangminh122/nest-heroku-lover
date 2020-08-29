@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { idFile } from "./config";
 import { async } from "rxjs/internal/scheduler/async";
 import { UserService } from "../user/user.service";
+import { UserFileService } from "../user_file/user_file.service";
 
 
 @Injectable()
@@ -13,7 +14,8 @@ export class UploadService {
   constructor(
     @Inject('FILE_REPOSITORY')
     private readonly fileRepository: typeof FileEntity,
-    private userService: UserService
+    private userService: UserService,
+    private userFileService: UserFileService
   ) {}
 
     async saveAvatar(file) {
@@ -54,7 +56,7 @@ export class UploadService {
   }
 
 
-  async saveFile(file) {
+  async saveFile(file,userId) {
     try {
         let result = await idFile.id.map(async(value,index)=>{
             let dataFiles = [];
@@ -63,22 +65,40 @@ export class UploadService {
                 fileName: file[index].fieldname,
                 size: file[index].size
               };
-              const files = await this.fileRepository.create(dataFile);
-                if (!files) {
-                    throw new HttpException(
-                    {
-                        status: HttpStatus.BAD_REQUEST,
-                        error: 'Bad Request !',
-                    },
-                    HttpStatus.BAD_REQUEST
-                    );
-                }
-                // dataFiles.push(files.id);
+              const files = await this.fileRepository.create(dataFile)
+              .then((value)=>{
                 console.log(dataFiles)
-                return files.id;
+                let userFileData = {
+                  userId:userId,
+                  fileId:value.id,
+                  description:''
+                }
+                this.userFileService.saveFile(userFileData);
+              })
+              .catch((e)=>{
+                throw new HttpException(
+                      {
+                          status: HttpStatus.BAD_REQUEST,
+                          error: 'Bad Request !',
+                      },
+                      HttpStatus.BAD_REQUEST
+                      );
+              });
+                // if (!files) {
+                //     throw new HttpException(
+                //     {
+                //         status: HttpStatus.BAD_REQUEST,
+                //         error: 'Bad Request !',
+                //     },
+                //     HttpStatus.BAD_REQUEST
+                //     );
+                // }
+                // dataFiles.push(files.id);
+               
+                return 1;
 
         });
-        // console.log(result)
+        console.log(result)
       //set idFile default
       idFile.id = [];
       return {

@@ -1,38 +1,25 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from 'class-validator';
 
-export class FileDTO {
+export class ContentDTO {
     @ApiProperty()
     @IsOptional()  
-    code: string;
+    userId: string;
     
     @ApiProperty()
     @IsOptional()
     @IsString()
-    originalName: string;
+    title?: string;
 
     @ApiProperty()
     @IsOptional()
     @IsString()
-    fileName: string;
-
-    @ApiProperty()
-    @IsOptional()
-    day: number;
+    content?: string;
 
     @ApiProperty()
     @IsOptional()
     @IsString()
-    size: string;
+    day: string;
 
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    url: string;
-
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    content: string;
-
+    
 }
