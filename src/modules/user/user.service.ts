@@ -25,7 +25,19 @@ export class UserService {
         let user = await this.userRepository.findOne({
             where: {
                 id
-            }
+            },
+           
+            include: [
+                {
+                  attributes:['id','originalName','day','url'],
+                  model: FileEntity,
+                  as: 'files',
+                  order: [
+                    ['day', 'ASC'],
+                ]
+                //   required: isEmpty(whereClauseContact) ? false : true,
+                },
+              ],
         });
         return user;
     }

@@ -12,7 +12,7 @@ export class UploadController {
     ) { }
 
     
-    @Post('/:id/:day')
+    @Post('some/:id/:day')
     @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {
@@ -46,8 +46,8 @@ export class UploadController {
         },
     })
     @UseInterceptors(FilesInterceptor('files', null, multerOptions))
-    async uploadFileAvatar(@UploadedFiles() file, @Param('user_id') userId: String) {
-        // console.log(file)
+    async uploadFileAvatar(@UploadedFiles() file) {
+        console.log(file)
         return await this.uploadService.saveAvatar(file);
     }
 

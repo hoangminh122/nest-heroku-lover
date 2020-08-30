@@ -10,7 +10,7 @@ export class ContentController {
 
     @Post()
     createUser(@Body() data: ContentDTO) {
-        console.log(data)
+        // console.log(data)
          return this.contentService.saveFile(data);
     }
 }
