@@ -20,9 +20,9 @@ function uuidRandom(file) {
 // Multer upload options
 export const multerOptions = {
     // Enable file size limits
-    limits: {
-        fileSize: 1000000,
-    },
+    // limits: {
+    //     fileSize: 1000000,
+    // },
     // Check the mimetypes to allow for upload
     fileFilter: (req: any, file: any, cb: any) => {
         if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {

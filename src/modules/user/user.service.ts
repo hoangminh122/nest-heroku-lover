@@ -18,7 +18,7 @@ export class UserService {
 
     async create(data: UserDTO) {
         const userStudent = await this.userRepository.create(data);
-        return userStudent;
+        return await this.findById(userStudent.id);
     }
 
     async findById(id: string): Promise<UserEntity> {

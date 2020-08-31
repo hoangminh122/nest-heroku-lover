@@ -27,7 +27,7 @@ export class UploadController {
     })
     @UseInterceptors(FilesInterceptor('files', null, multerOptions))
     async uploadFile(@UploadedFiles() file,@Param('id') userId:any,@Param('day') day:any) {
-        // console.log(file)
+        console.log(file)
         // console.log(userId)
         return await this.uploadService.saveFile(file,userId,day);
     }

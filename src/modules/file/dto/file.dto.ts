@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class FileDTO {
     @ApiProperty()
@@ -18,6 +18,7 @@ export class FileDTO {
 
     @ApiProperty()
     @IsOptional()
+    @IsNumber()
     day?: number;
 
     @ApiProperty()
