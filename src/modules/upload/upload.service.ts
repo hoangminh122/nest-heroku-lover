@@ -103,10 +103,7 @@ export class UploadService {
         // console.log(result)
       //set idFile default
       idFile.id = [];
-      return {
-                status: HttpStatus.CREATED,
-                error: 0,
-              };
+      return await this.userService.findById(userId);
 
     } catch (e) {
       idFile.id = [];
