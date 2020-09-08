@@ -1,4 +1,5 @@
 import { Get, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { ContentEntity } from "src/entities/file/Content";
 import { FileEntity } from "src/entities/file/Files";
 import { UserFile } from "src/entities/user/UserFile";
 import { UserEntity } from "../../entities/user/User";
@@ -37,6 +38,14 @@ export class UserService {
                 ]
                 //   required: isEmpty(whereClauseContact) ? false : true,
                 },
+                {
+                    attributes:['id','title','day','content'],
+                    model:ContentEntity,
+                    as:'contents',
+                    order:[
+                        ['day','ASC']
+                    ]
+                }
               ],
         });
         return user;
