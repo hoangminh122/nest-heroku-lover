@@ -10,6 +10,7 @@ import { join } from 'path';
 import { MulterModule } from '@nestjs/platform-express/multer/multer.module';
 import { UserFileModule } from './modules/user_file/user_file.module';
 import { ContentModule } from './modules/content/content.module';
+import { DayLoveModule } from './modules/day_love/day_love.module';
 
 @Module({
  
@@ -25,7 +26,8 @@ import { ContentModule } from './modules/content/content.module';
     FileModule,
     UploadModule,
     UserFileModule,
-    ContentModule
+    ContentModule,
+    DayLoveModule
   ],
 })
 export class AppModule {}

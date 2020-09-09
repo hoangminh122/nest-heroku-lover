@@ -54,6 +54,13 @@ export class UserEntity extends Model<UserEntity> {
       type:DataType.STRING(50)
     })
     gender: string;
+
+    @Column({
+      field:'day_start',
+      allowNull:true,
+      type:DataType.STRING(255)
+    })
+    dayStart: string;
     
     @Column({
       field:'date_of_birth',

@@ -26,6 +26,9 @@ export class UserDTO {
     @IsString()
     avatar?: string;
 
+    @IsOptional()
+    @IsString()
+    dayStart?: string;
 
     @ApiProperty()
     @IsOptional()

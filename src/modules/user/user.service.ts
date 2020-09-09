@@ -22,6 +22,16 @@ export class UserService {
         return await this.findById(userStudent.id);
     }
 
+    async findByDefaultId(id: string): Promise<UserEntity> {
+        let user = await this.userRepository.findOne({
+            where: {
+                id
+            }
+        });
+        return user;
+    }
+
+    
     async findById(id: string): Promise<UserEntity> {
         let user = await this.userRepository.findOne({
             where: {
