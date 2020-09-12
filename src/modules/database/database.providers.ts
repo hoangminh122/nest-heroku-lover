@@ -2,7 +2,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import { ContentEntity } from 'src/entities/file/Content';
 import { FileEntity } from 'src/entities/file/Files';
+import { MemberEntity } from 'src/entities/user/Member';
 import { UserFile } from 'src/entities/user/UserFile';
+import { UserMember } from 'src/entities/user/UserMember';
 import { UserEntity } from '../../entities/user/User';
 import { databaseConfig } from '../../shared/config/database';
 
@@ -24,9 +26,9 @@ export const databaseProvider = {
         config = databaseConfig.development;
     }
 
-    const sequelize = new Sequelize({ ...config });
-    sequelize.addModels([UserEntity,FileEntity,UserFile,ContentEntity]);
-    await sequelize.sync({ force: false });
+    const sequelize = new Sequelize({...config });
+    sequelize.addModels([UserEntity,FileEntity,UserFile,ContentEntity,MemberEntity,UserMember]);
+    await sequelize.sync({ force: true });
     return sequelize;
   },
 };
