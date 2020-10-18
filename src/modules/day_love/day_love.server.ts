@@ -1,25 +1,25 @@
 import { Inject, Injectable, HttpException, HttpStatus } from "@nestjs/common";
-import { UserEntity } from "src/entities/user/User";
-import { UserService } from "../user/user.service";
+import { Group } from "src/entities/user/Group";
+import { GroupService } from "../group/group.service";
 
 @Injectable()
 export class DayLoveService {
     constructor(
-        @Inject('USER_REPOSITORY') private userRepository: typeof UserEntity,
-        private userService:UserService
+        @Inject('GroupsRepository') private groupRepository: typeof Group,
+        private groupService:GroupService
     ){
     }
 
     async setDayStart(id) {
-        const user = await this.userService.findByDefaultId(id);
+        const user = await this.groupService.findByDefaultId(id);
         let userDTO = JSON.parse(JSON.stringify(user));
         userDTO.dayStart = new Date().toISOString();
-        return await this.userService.update(id,userDTO);
+        return await this.groupService.update(id,userDTO);
     }
 
     async findTimeLove(id){
         try{
-            const user = await this.userRepository.findOne({
+            const user = await this.groupRepository.findOne({
                 where:{
                     id:id
                 }

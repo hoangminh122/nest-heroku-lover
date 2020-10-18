@@ -1,29 +1,29 @@
 import { Get, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { ContentEntity } from "src/entities/file/Content";
+import { Content } from "src/entities/file/Content";
 import { FileEntity } from "src/entities/file/Files";
-import { UserFile } from "src/entities/user/UserFile";
-import { UserEntity } from "../../entities/user/User";
-import { UserDTO } from "./dto/user.dto";
+import { Group } from "../../entities/user/Group";
+import { GroupDTO } from "./dto/group.dto";
 
 @Injectable()
-export class UserService {
+export class GroupService {
    
     constructor(
-        @Inject('USER_REPOSITORY') private userRepository: typeof UserEntity
+        @Inject('GroupsRepository') private groupRepository: typeof Group
     ) { }
+    
 
-    async showAll(): Promise<UserEntity[]> {
-        return await this.userRepository.findAll({ include: [{model:FileEntity, as:'files'}]});
+    async showAll(): Promise<Group[]> {
+        return await this.groupRepository.findAll({ include: [{model:FileEntity, as:'files'}]});
         // return await this.userRepository.findAll();
     }
 
-    async create(data: UserDTO) {
-        const userStudent = await this.userRepository.create(data);
+    async create(data: GroupDTO) {
+        const userStudent = await this.groupRepository.create(data);
         return await this.findById(userStudent.id);
     }
 
-    async findByDefaultId(id: string): Promise<UserEntity> {
-        let user = await this.userRepository.findOne({
+    async findByDefaultId(id: string): Promise<Group> {
+        let user = await this.groupRepository.findOne({
             where: {
                 id
             }
@@ -32,8 +32,8 @@ export class UserService {
     }
 
     
-    async findById(id: string): Promise<UserEntity> {
-        let user = await this.userRepository.findOne({
+    async findById(id: string): Promise<Group> {
+        let user = await this.groupRepository.findOne({
             where: {
                 id
             },
@@ -50,7 +50,7 @@ export class UserService {
                 },
                 {
                     attributes:['id','title','day','content'],
-                    model:ContentEntity,
+                    model:Content,
                     as:'contents',
                     order:[
                         ['day','ASC']
@@ -61,9 +61,9 @@ export class UserService {
         return user;
     }
 
-    async update(id: string, data: UserDTO) {
+    async update(id: string, data: GroupDTO) {
         try {
-            let todo = await this.userRepository.findOne({
+            let todo = await this.groupRepository.findOne({
                 where: {
                     id
                 }
@@ -78,8 +78,8 @@ export class UserService {
             }
 
 
-            await this.userRepository.update(data, { where: { id } });
-            return await this.userRepository.findOne({
+            await this.groupRepository.update(data, { where: { id } });
+            return await this.groupRepository.findOne({
                 where: {
                     id
                 }
@@ -93,7 +93,7 @@ export class UserService {
     }
 
     async destroy(id: string) {
-        await this.userRepository.destroy({
+        await this.groupRepository.destroy({
             where: {
                 id
             }

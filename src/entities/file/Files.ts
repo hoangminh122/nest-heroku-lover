@@ -1,7 +1,7 @@
 import { UUIDV4 } from 'sequelize';
 import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
-import { UserEntity } from '../user/User';
-import { UserFile } from '../user/UserFile';
+import { Group } from '../user/Group';
+import { GroupFile } from '../user/GroupFile';
 
 @Table({
   tableName: 'files',
@@ -50,7 +50,7 @@ export class FileEntity extends Model<FileEntity> {
     })
     updatedAt?: Date;
 
-    @BelongsToMany(() => UserEntity,() => UserFile)
-    users?: UserEntity[];
+    @BelongsToMany(() => Group,() => GroupFile)
+    groups?: Group[];
 
 }
