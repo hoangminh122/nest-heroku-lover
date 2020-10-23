@@ -1,11 +1,12 @@
 import { Body, Controller, Get, Inject, Param, Post, Put, UploadedFiles, UseInterceptors } from "@nestjs/common";
 import { FilesInterceptor } from "@nestjs/platform-express/multer/interceptors/files.interceptor";
-import { ApiBody, ApiConsumes } from "@nestjs/swagger";
+import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { UploadService } from "./upload.service";
 import { multerOptions } from "./config";
 
 
 @Controller('upload')
+@ApiTags('Upload')
 export class UploadController {
     constructor(
         private uploadService: UploadService,

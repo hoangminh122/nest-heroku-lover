@@ -5,10 +5,11 @@ import { FileEntity } from "../file/Files";
     tableName:'member',
     timestamps:false
 })
-export class MemberEntity extends Model<FileEntity> {
+export class Member extends Model<Member> {
     @PrimaryKey
     @Column({
-        type:DataType.INTEGER
+        type:DataType.INTEGER,
+        autoIncrement:true
     })
     id?: Number 
 

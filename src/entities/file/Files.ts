@@ -1,7 +1,7 @@
 import { UUIDV4 } from 'sequelize';
-import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
-import { UserEntity } from '../user/User';
-import { UserFile } from '../user/UserFile';
+import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany, Sequelize } from 'sequelize-typescript';
+import { Group } from '../user/Group';
+import { GroupFile } from '../user/GroupFile';
 
 @Table({
   tableName: 'files',
@@ -13,7 +13,7 @@ export class FileEntity extends Model<FileEntity> {
     @PrimaryKey
     @Column({
         type:DataType.UUID,
-        defaultValue: UUIDV4,
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
     })
     id?: string;
 
@@ -50,7 +50,7 @@ export class FileEntity extends Model<FileEntity> {
     })
     updatedAt?: Date;
 
-    @BelongsToMany(() => UserEntity,() => UserFile)
-    users?: UserEntity[];
+    @BelongsToMany(() => Group,() => GroupFile)
+    groups?: Group[];
 
 }

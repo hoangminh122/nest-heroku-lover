@@ -1,18 +1,14 @@
 import { Module } from "@nestjs/common";
-import { UserEntity } from "src/entities/user/User";
+import { groupRepository } from "../database/repository.database.provider";
+import { GroupModule } from "../group/group.module";
 import { DayLoveController } from "./day_love.controller";
 import { DayLoveService } from "./day_love.server";
-import { UserService } from "../user/user.service";
-import { UserModule } from "../user/user.module";
 
 
 @Module({
-    imports:[UserModule],
+    imports:[GroupModule],
     providers:[DayLoveService,
-        {
-            provide:'USER_REPOSITORY',
-            useValue:UserEntity
-        }
+        groupRepository
     ],
     controllers:[DayLoveController],
     exports:[]

@@ -5,8 +5,8 @@ import { FileEntity } from "../../entities/file/Files";
 import { v4 as uuid } from 'uuid';
 import { idFile } from "./config";
 import { async } from "rxjs/internal/scheduler/async";
-import { UserService } from "../user/user.service";
-import { UserFileService } from "../user_file/user_file.service";
+import { GroupService } from "../group/group.service";
+import { GroupFileService } from "../user_file/user_file.service";
 
 
 @Injectable()
@@ -14,8 +14,8 @@ export class UploadService {
   constructor(
     @Inject('FILE_REPOSITORY')
     private readonly fileRepository: typeof FileEntity,
-    private userService: UserService,
-    private userFileService: UserFileService
+    private groupService: GroupService,
+    private userFileService: GroupFileService
   ) {}
 
     async saveAvatar(file) {
@@ -103,7 +103,7 @@ export class UploadService {
         // console.log(result)
       //set idFile default
       idFile.id = [];
-      return await this.userService.findById(userId);
+      return await this.groupService.findById(userId);
 
     } catch (e) {
       idFile.id = [];
