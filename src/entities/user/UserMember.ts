@@ -1,7 +1,7 @@
 import { table } from "console";
 import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { Group } from "./Group";
-import { Member } from "./member";
+import { Member } from "./Member";
 
 @Table({
     tableName:'user_member',timestamps:false
