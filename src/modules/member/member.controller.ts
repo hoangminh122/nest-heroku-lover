@@ -1,8 +1,11 @@
 import { Body, Controller, Param, Post } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { MemberDTO } from "./dto/member.dto";
 import { MemberService } from "./member.service";
 
 @Controller('member')
+@ApiTags('Member')
+// @ApiBearerAuth()
 export class MemberController {
     constructor(
         private memberService : MemberService
@@ -10,8 +13,12 @@ export class MemberController {
     }
 
     @Post('/:idUser')
-    createMember(@Body() data: MemberDTO,@Param('idUser') idUser:string){
-        this.memberService.createMember(data,idUser);
+    async createMember(@Body() data: MemberDTO,@Param('idUser') idUser:string){
+        const result = await this.memberService.createMember(data,idUser);
+        return {
+            success :result
+        }
     }
+    
     
 }

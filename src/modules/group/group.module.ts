@@ -1,7 +1,7 @@
 import { forwardRef, Module } from "@nestjs/common";
 import { groupRepository } from "../database/repository.database.provider";
 import { UploadModule } from "../upload/upload.module";
-import { UserController } from "./group.controller";
+import { GroupController } from "./group.controller";
 import { GroupService } from "./group.service";
 
 
@@ -11,7 +11,7 @@ import { GroupService } from "./group.service";
         GroupService,
         groupRepository
     ],
-    controllers:[UserController],
+    controllers:[GroupController],
     exports:[GroupService]
 })
 export class GroupModule {

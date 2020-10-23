@@ -1,9 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { GroupDTO } from "./dto/group.dto";
 import { GroupService } from "./group.service";
 
 @Controller('group')
-export class UserController {
+@ApiTags('Group')
+export class GroupController {
     constructor(
         private groupService: GroupService 
     ){}

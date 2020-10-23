@@ -4,9 +4,9 @@ import { NotNull } from "sequelize-typescript";
 
 export class MemberDTO {
     
-    @ApiProperty()
-    @IsNumber()
-    id!: Number;
+    // @ApiProperty()
+    // @IsNumber()
+    // id!: Number;
 
     @ApiPropertyOptional()
     @IsString()

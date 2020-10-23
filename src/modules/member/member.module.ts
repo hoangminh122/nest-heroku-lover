@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { DatabaseModule } from "../database/database.module";
 import { groupRepository, memberRepository } from "../database/repository.database.provider";
 import { UnitOfWork } from "../database/UnitOfWork";
 import { MemberController } from "./member.controller";
@@ -6,7 +7,7 @@ import { MemberService } from "./member.service";
 
 
 @Module({
-    imports:[],
+    imports:[DatabaseModule],
     providers:[
         memberRepository,
         groupRepository,
@@ -17,6 +18,6 @@ import { MemberService } from "./member.service";
     ],
     exports:[]
 })
-export class ContentModule {
+export class MemberModule {
 
 }

@@ -8,7 +8,8 @@ import { FileEntity } from "../file/Files";
 export class Member extends Model<Member> {
     @PrimaryKey
     @Column({
-        type:DataType.INTEGER
+        type:DataType.INTEGER,
+        autoIncrement:true
     })
     id?: Number 
 

@@ -11,6 +11,7 @@ import { ContentModule } from './modules/content/content.module';
 import { DayLoveModule } from './modules/day_love/day_love.module';
 import { GroupModule } from './modules/group/group.module';
 import { GroupFileModule } from './modules/user_file/user_file.module';
+import { MemberModule } from './modules/member/member.module';
 
 @Module({
  
@@ -27,7 +28,8 @@ import { GroupFileModule } from './modules/user_file/user_file.module';
     UploadModule,
     GroupFileModule,
     ContentModule,
-    DayLoveModule
+    DayLoveModule,
+    MemberModule
   ],
 })
 export class AppModule {}

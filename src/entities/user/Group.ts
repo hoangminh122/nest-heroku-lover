@@ -1,5 +1,5 @@
 import { UUIDV4 } from 'sequelize';
-import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
+import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany, Sequelize } from 'sequelize-typescript';
 import { Content } from '../file/Content';
 import { FileEntity } from '../file/Files';
 import { GroupFile } from './GroupFile';
@@ -12,12 +12,13 @@ import { Member } from './Member';
     fields: ['code']
   }] 
 })
+
 export class Group extends Model<Group> {
     @IsUUID(4)
     @PrimaryKey
     @Column({
         type:DataType.UUID,
-        defaultValue:UUIDV4
+        defaultValue:Sequelize.literal('uuid_generate_v4()')
     })
     id! :string;
 

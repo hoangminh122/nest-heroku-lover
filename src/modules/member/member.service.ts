@@ -10,21 +10,22 @@ export class MemberService {
     constructor(
         @Inject(UnitOfWork)
         private readonly unitOfWork: UnitOfWork,
-        @InjectModel(Member)
+        @Inject('MembersRepository')
         private memberModel: typeof Member,
-        @InjectModel(Group)
-        private userModel: typeof Group
+        @Inject('GroupsRepository')
+        private groupModel: typeof Group
     ){ }
 
     async createMember(data,idUser:string){
 
         return await this.unitOfWork.scope(async () => {
 
-            const userOwn = await this.userModel.findOne({where:{
+            const userOwn = await this.groupModel.findOne({where:{
                 id:idUser
             }});
-
+            console.log(userOwn)
             if(!userOwn) {
+                console.log("asagshagshasghg")
                 throw new HttpException(
                     {
                         status:HttpStatus.NOT_FOUND,
@@ -35,7 +36,8 @@ export class MemberService {
             }
 
             data.userId = idUser;
-            return await this.memberModel.create(data)
+            await this.memberModel.create(data);
+            return true;
         })
     }
 }

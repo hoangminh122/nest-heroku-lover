@@ -1,8 +1,10 @@
 import { Controller, Get, Param } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { get } from "http";
 import { DayLoveService } from "./day_love.server";
 
 @Controller('day-love')
+@ApiTags('day-love')
 export class DayLoveController {
     constructor(
         private dayLoveService: DayLoveService

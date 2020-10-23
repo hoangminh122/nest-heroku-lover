@@ -28,7 +28,7 @@ export const databaseProvider = {
 
     const sequelize = new Sequelize({...config });
     sequelize.addModels([Group,FileEntity,GroupFile,Content,Member,UserMember]);
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     return sequelize;
   },
 };
