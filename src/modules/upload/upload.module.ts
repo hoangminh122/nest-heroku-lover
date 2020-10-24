@@ -4,9 +4,15 @@ import { UploadController } from "./upload.controller";
 import { UploadService } from "./upload.service";
 import { GroupModule } from "../group/group.module";
 import { GroupFileModule } from "../user_file/user_file.module";
+import { DatabaseModule } from "../database/database.module";
 
 @Module({
-    imports:[forwardRef(() => GroupModule),forwardRef(() => GroupFileModule),GroupFileModule],
+    imports:[
+        DatabaseModule,
+        forwardRef(() => GroupModule),
+        forwardRef(() => GroupFileModule),
+        GroupFileModule
+    ],
     providers:[UploadService,{
         provide: 'FILE_REPOSITORY',
         useValue: FileEntity

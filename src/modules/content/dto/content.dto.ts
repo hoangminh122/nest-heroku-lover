@@ -1,25 +1,25 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class ContentDTO {
     @ApiProperty()
-    @IsOptional()  
-    userId: string;
+    // @IsOptional()  
+    groupId: string;
     
     @ApiProperty()
-    @IsOptional()
+    // @IsOptional()
     @IsString()
-    title?: string;
+    title: string;
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsOptional()
     @IsString()
     content?: string;
 
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    day?: string;
+    // @IsOptional()
+    @IsNumber()
+    day: string;
 
     
 }

@@ -30,6 +30,13 @@ export class Group extends Model<Group> {
     avatar: string;
 
     @Column({
+      field:'full_name',
+      allowNull:true,
+      type:DataType.STRING(255)
+    })
+    fullName: string;
+
+    @Column({
       field:'code',
       allowNull:false,
       type:DataType.STRING(20)
@@ -46,9 +53,10 @@ export class Group extends Model<Group> {
     @Column({
       field:'day_start',
       allowNull:true,
-      type:DataType.STRING(255)
+      type:DataType.STRING(255),
+      defaultValue:Sequelize.literal('CURRENT_TIMESTAMP')
     })
-    dayStart: string;
+    dayStart: Date;
 
     @Column({
       field: 'created_at',

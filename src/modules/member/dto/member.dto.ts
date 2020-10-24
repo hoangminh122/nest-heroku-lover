@@ -8,9 +8,9 @@ export class MemberDTO {
     // @IsNumber()
     // id!: Number;
 
-    @ApiPropertyOptional()
+    @ApiProperty()
     @IsString()
-    fullName?: string;
+    fullName: string;
 
     @ApiPropertyOptional()
     @IsDateString()

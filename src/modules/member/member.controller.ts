@@ -12,9 +12,9 @@ export class MemberController {
     ){
     }
 
-    @Post('/:idUser')
-    async createMember(@Body() data: MemberDTO,@Param('idUser') idUser:string){
-        const result = await this.memberService.createMember(data,idUser);
+    @Post('/:groupUser')
+    async createMember(@Body() data: MemberDTO,@Param('groupUser') groupUser:string){
+        const result = await this.memberService.createMember(data,groupUser);
         return {
             success :result
         }

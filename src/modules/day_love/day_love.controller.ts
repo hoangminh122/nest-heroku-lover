@@ -13,7 +13,6 @@ export class DayLoveController {
 
     @Get('set-date-start/:id')
     async setDayStart(@Param('id') id:string){
-        console.log("asjdgashg")
         return this.dayLoveService.setDayStart(id);
     }
 
