@@ -12,6 +12,7 @@ import { DayLoveModule } from './modules/day_love/day_love.module';
 import { GroupModule } from './modules/group/group.module';
 import { GroupFileModule } from './modules/user_file/user_file.module';
 import { MemberModule } from './modules/member/member.module';
+import { UserFileController } from './modules/user_file/user_file.controller';
 
 @Module({
  
@@ -29,7 +30,8 @@ import { MemberModule } from './modules/member/member.module';
     GroupFileModule,
     ContentModule,
     DayLoveModule,
-    MemberModule
+    MemberModule,
+    UserFileController
   ],
 })
 export class AppModule {}

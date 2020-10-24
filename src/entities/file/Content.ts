@@ -21,7 +21,7 @@ export class Content extends Model<Content> {
         type:DataType.UUID,
         defaultValue:UUIDV4
     })
-    userId!:string
+    groupId!:string
     @Column({ allowNull: true, type: DataType.STRING(255) })
     title?: string;
 

@@ -16,12 +16,12 @@ export class MemberService {
         private groupModel: typeof Group
     ){ }
 
-    async createMember(data,idUser:string){
+    async createMember(data,groupUser:string){
 
         return await this.unitOfWork.scope(async () => {
 
             const userOwn = await this.groupModel.findOne({where:{
-                id:idUser
+                id:groupUser
             }});
             console.log(userOwn)
             if(!userOwn) {
@@ -35,7 +35,7 @@ export class MemberService {
                 )
             }
 
-            data.userId = idUser;
+            data.groupId = groupUser;
             await this.memberModel.create(data);
             return true;
         })

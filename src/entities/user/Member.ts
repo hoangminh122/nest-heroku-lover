@@ -3,7 +3,11 @@ import { FileEntity } from "../file/Files";
 
 @Table({
     tableName:'member',
-    timestamps:false
+    timestamps:false,
+    indexes: [{
+        unique: true,
+        fields: ['code']
+      }]
 })
 export class Member extends Model<Member> {
     @PrimaryKey
@@ -13,15 +17,15 @@ export class Member extends Model<Member> {
     })
     id?: Number 
 
-    @Column({allowNull:true,type:DataType.STRING(255)})
+    @Column({allowNull:false,type:DataType.STRING(255)})
     fullName?:string
 
     @Column({
         field:'date_of_birth',
         allowNull:true,
-        type:DataType.STRING
+        type:DataType.DATEONLY
       })
-    dateOfBirth: string;
+    dateOfBirth: Date;
 
     @Column({
         field:'code',

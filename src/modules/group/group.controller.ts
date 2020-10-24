@@ -16,20 +16,19 @@ export class GroupController {
         return this.groupService.showAll();
     }
 
-    @Get('/test')
-    getAllUsers() {
-        // console.log("ok")
-        return {minh:"agshg"};
-    }
 
-
-    @Get('GetById/:id')
+    @Get(':id')
     showUserById(@Param('id') id: string) {
         return this.groupService.findById(id);
     }
 
+    @Get('get-by-code/:code')
+    async showUserByCode(@Param('code') code: string) {
+        return await this.groupService.findByCode(code);
+    }
+
     @Post()
-    createUser(@Body() data: GroupDTO) {
+    createUser(@Body() data: GroupDTO) { 
          return this.groupService.create(data);
     }
 

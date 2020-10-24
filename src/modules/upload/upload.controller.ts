@@ -13,7 +13,7 @@ export class UploadController {
     ) { }
 
     
-    @Post('some/:id/:day')
+    @Post('some/:groupId/:day')
     @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {
@@ -27,10 +27,10 @@ export class UploadController {
         },
     })
     @UseInterceptors(FilesInterceptor('files', null, multerOptions))
-    async uploadFile(@UploadedFiles() file,@Param('id') userId:any,@Param('day') day:any) {
+    async uploadFile(@Param('groupId') groupId:any,@Param('day') day:number,@UploadedFiles() file) {
         console.log(file)
         // console.log(userId)
-        return await this.uploadService.saveFile(file,userId,day);
+        return await this.uploadService.saveFile(file,groupId,day);
     }
 
     @Post('/user/avatar')
@@ -80,9 +80,9 @@ export class UploadController {
         
     }
 
-    @Post()
-    saveContent(@Body() content){
+    // @Post()
+    // saveContent(@Body() content){
 
-    }
+    // }
 
 }

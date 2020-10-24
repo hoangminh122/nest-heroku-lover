@@ -1,37 +1,29 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsDateString, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class GroupDTO {
     @ApiProperty()
-    @IsOptional()  
+    @IsNotEmpty()
+    @IsString() 
     code: string;
-    
+
     @ApiProperty()
-    @IsOptional()
     @IsString()
     fullName: string;
 
-    @ApiProperty()
+    @ApiPropertyOptional()
     @IsOptional()
     @IsString()
     ownName?: string;
 
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    gender?: string;
-
-    // @ApiProperty()
+    @ApiPropertyOptional()
     @IsOptional()
     @IsString()
     avatar?: string;
 
+    @ApiPropertyOptional()
     @IsOptional()
-    @IsString()
-    dayStart?: string;
+    @IsDateString()
+    dayStart?: Date;
 
-    @ApiProperty()
-    @IsOptional()
-    @IsString()
-    dateOfBirth: string;
 }

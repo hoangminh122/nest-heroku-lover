@@ -61,6 +61,43 @@ export class GroupService {
         return user;
     }
 
+    async findByCode(code: string): Promise<Group> {
+        let user = await this.groupRepository.findOne({
+            where: {
+                code
+            },
+           
+            include: [
+                {
+                  attributes:['id','originalName','day','url'],
+                  model: FileEntity,
+                  as: 'files',
+                  order: [
+                    ['day', 'ASC'],
+                ]
+                //   required: isEmpty(whereClauseContact) ? false : true,
+                },
+                {
+                    attributes:['id','title','day','content'],
+                    model:Content,
+                    as:'contents',
+                    order:[
+                        ['day','ASC']
+                    ]
+                }
+              ],
+        });
+        if(!user) throw new HttpException(
+            {
+                status:HttpStatus.NOT_FOUND,
+                error:'Not Found'
+            }
+            ,
+            HttpStatus.NOT_FOUND
+        )
+        return user;
+    }
+
     async update(id: string, data: GroupDTO) {
         try {
             let todo = await this.groupRepository.findOne({
