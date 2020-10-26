@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Inject } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { async } from "rxjs/internal/scheduler/async";
 import { Group } from "src/entities/user/Group";
 import { Member } from "src/entities/user/Member";
 import { UnitOfWork } from "../database/UnitOfWork";
@@ -16,28 +17,56 @@ export class MemberService {
         private groupModel: typeof Group
     ){ }
 
-    async createMember(data,groupUser:string){
+    async addMemberToGroup(groupUser:string,memberId:string){
 
         return await this.unitOfWork.scope(async () => {
 
-            const userOwn = await this.groupModel.findOne({where:{
+            const group = await this.groupModel.findOne({where:{
                 id:groupUser
             }});
-            console.log(userOwn)
-            if(!userOwn) {
+            if(!group) {
                 console.log("asagshagshasghg")
                 throw new HttpException(
                     {
                         status:HttpStatus.NOT_FOUND,
-                        error:'Not Found'
+                        error:'Group Not Found'
                     },
                     HttpStatus.NOT_FOUND
                 )
             }
 
-            data.groupId = groupUser;
-            await this.memberModel.create(data);
+            let member :any = await this.memberModel.findOne({where:{
+                id:memberId
+            }});
+            if(!member) {
+                throw new HttpException(
+                    {
+                        status:HttpStatus.NOT_FOUND,
+                        error:'Member Not Found'
+                    },
+                    HttpStatus.NOT_FOUND
+                )
+            }
+
+            member.groupId = groupUser;
+            const memberCover = JSON.parse(JSON.stringify(member));
+            //update member with groupId
+            await this.memberModel.update(memberCover,{where:{id:memberId}});
             return true;
         })
+    }
+
+    async createMember(data){
+        return await this.unitOfWork.scope(async()=>{
+            await this.memberModel.create(data);
+            return true;
+        });
+    }
+
+    async updateMember(data,id){
+        return await this.unitOfWork.scope(async()=>{
+            await this.memberModel.update(data,{where:{id}});
+            return true;
+        });
     }
 }

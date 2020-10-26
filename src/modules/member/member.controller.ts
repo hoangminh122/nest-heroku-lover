@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post } from "@nestjs/common";
+import { Body, Controller, Param, Post, Put } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { MemberDTO } from "./dto/member.dto";
 import { MemberService } from "./member.service";
@@ -12,13 +12,29 @@ export class MemberController {
     ){
     }
 
-    @Post('/:groupUser')
-    async createMember(@Body() data: MemberDTO,@Param('groupUser') groupUser:string){
-        const result = await this.memberService.createMember(data,groupUser);
+    @Post('/:groupUser/:memberId')
+    async addMemberToGroup(@Param('groupUser') groupUser:string,@Param('memberId') memberId:string){
+        const result = await this.memberService.addMemberToGroup(groupUser,memberId);
+        return {
+            success :result
+        }
+    }
+
+    @Post()
+    async createMember(@Body() data: MemberDTO){
+        const result = await this.memberService.createMember(data);
+        return {
+            success :result
+        }
+    }
+
+    @Put(':id')
+    async updateMember(@Body() data: MemberDTO,@Param('id') memberId:string){
+        const result = await this.memberService.updateMember(data,memberId);
         return {
             success :result
         }
     }
     
     
-}
+}           

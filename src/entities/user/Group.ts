@@ -87,8 +87,8 @@ export class Group extends Model<Group> {
     @HasMany(() => Content,'userId')
     contents: Content[];
 
-    // @HasMany(() => Member,'userId')
-    // members:Member[]
+    @HasMany(() => Member,'groupId')
+    members:Member[]
     
 
 }

@@ -1,5 +1,6 @@
-import { Column, CreatedAt, DataType, DeletedAt, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { Column, CreatedAt, DataType, DeletedAt, ForeignKey, IsUUID, Model, PrimaryKey, Sequelize, Table } from "sequelize-typescript";
 import { FileEntity } from "../file/Files";
+import { Group } from "./Group";
 
 @Table({
     tableName:'member',
@@ -10,12 +11,14 @@ import { FileEntity } from "../file/Files";
       }]
 })
 export class Member extends Model<Member> {
+    @IsUUID(4)
     @PrimaryKey
     @Column({
-        type:DataType.INTEGER,
-        autoIncrement:true
+        type:DataType.UUID,
+        defaultValue:Sequelize.literal('uuid_generate_v4()')
     })
-    id?: Number 
+    id! :string;
+
 
     @Column({allowNull:false,type:DataType.STRING(255)})
     fullName?:string
@@ -41,6 +44,9 @@ export class Member extends Model<Member> {
     })
     gender?:string
 
+    @ForeignKey(() => Group)
+    @Column({ field: 'group_id', allowNull: false, type: DataType.UUID })
+    groupId!:string
     @Column({
         field:'created_at',
         allowNull:true,
