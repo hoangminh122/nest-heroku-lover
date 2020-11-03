@@ -33,7 +33,7 @@ export class UploadController {
         return await this.uploadService.saveFile(file,groupId,day);
     }
 
-    @Post('/user/avatar')
+    @Post('/group/avatar')
     @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {

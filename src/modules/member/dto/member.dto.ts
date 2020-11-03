@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsDateString, isDateString, IsNumber, IsString } from "class-validator";
+import { IsDateString, isDateString, IsNumber, IsOptional, IsString } from "class-validator";
 import { NotNull } from "sequelize-typescript";
 
 export class MemberDTO {
@@ -16,6 +16,10 @@ export class MemberDTO {
     @IsDateString()
     dateOfBirth?: Date;
 
+    @ApiPropertyOptional()
+    @IsString()
+    avatar?: string;
+
     @ApiProperty()
     @IsString()
     code: string;
@@ -23,6 +27,11 @@ export class MemberDTO {
     @ApiPropertyOptional()
     @IsString()
     gender?: string;
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    @IsString()
+    groupId?: string;
 
 
 }
