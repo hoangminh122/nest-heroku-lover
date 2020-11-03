@@ -25,7 +25,6 @@ export class MemberService {
                 id:groupUser
             }});
             if(!group) {
-                console.log("asagshagshasghg")
                 throw new HttpException(
                     {
                         status:HttpStatus.NOT_FOUND,
@@ -58,8 +57,8 @@ export class MemberService {
 
     async createMember(data){
         return await this.unitOfWork.scope(async()=>{
-            await this.memberModel.create(data);
-            return true;
+            return await this.memberModel.create(data);
+            // return true;
         });
     }
 

@@ -28,8 +28,8 @@ export class GroupController {
     }
 
     @Post()
-    createUser(@Body() data: GroupDTO) { 
-         return this.groupService.create(data);
+    async createUser(@Body() data: GroupDTO) { 
+         return await this.groupService.create(data);
     }
 
     @Delete(':id')
@@ -38,8 +38,8 @@ export class GroupController {
     }
 
     @Put(':id')
-    updateUser(@Param('id') id: string, @Body() data: GroupDTO) {
-        return this.groupService.update(id, data);
+    async updateUser(@Param('id') id: string, @Body() data: GroupDTO) {
+        return await this.groupService.update(id, data);
     }
 
 }

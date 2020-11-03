@@ -16,6 +16,10 @@ export class MemberDTO {
     @IsDateString()
     dateOfBirth?: Date;
 
+    @ApiPropertyOptional()
+    @IsString()
+    avatar?: string;
+
     @ApiProperty()
     @IsString()
     code: string;

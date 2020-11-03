@@ -22,10 +22,8 @@ export class MemberController {
 
     @Post()
     async createMember(@Body() data: MemberDTO){
-        const result = await this.memberService.createMember(data);
-        return {
-            success :result
-        }
+        return await this.memberService.createMember(data);
+        
     }
 
     @Put(':id')

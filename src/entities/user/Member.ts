@@ -19,7 +19,13 @@ export class Member extends Model<Member> {
     })
     id! :string;
 
-
+    @Column({
+        field:'avatar',
+        allowNull:true,
+        type:DataType.STRING(255)
+    })
+    avatar: string;
+    
     @Column({allowNull:false,type:DataType.STRING(255)})
     fullName?:string
 
@@ -45,7 +51,7 @@ export class Member extends Model<Member> {
     gender?:string
 
     @ForeignKey(() => Group)
-    @Column({ field: 'group_id', allowNull: false, type: DataType.UUID })
+    @Column({ field: 'group_id', allowNull: true, type: DataType.UUID })
     groupId!:string
     @Column({
         field:'created_at',
