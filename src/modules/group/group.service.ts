@@ -1,6 +1,7 @@
 import { Get, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { Content } from "src/entities/file/Content";
 import { FileEntity } from "src/entities/file/Files";
+import { Member } from "src/entities/user/Member";
 import { Group } from "../../entities/user/Group";
 import { GroupDTO } from "./dto/group.dto";
 
@@ -13,7 +14,18 @@ export class GroupService {
     
 
     async showAll(): Promise<Group[]> {
-        return await this.groupRepository.findAll({ include: [{model:FileEntity, as:'files'}]});
+        return await this.groupRepository.findAll({ 
+            include: [
+            {
+                model:FileEntity,
+                 as:'files'
+            },
+            {
+                model:Member,
+                 as:'members'
+            }
+        ]
+    });
         // return await this.userRepository.findAll();
     }
 
