@@ -30,12 +30,12 @@ export const databaseConfig: IDatabaseConfig = {
     logging: false,
     force: true,
     timezone: '+07:00',
-    // dialectOptions: {
-    //   ssl: {
-    //     require: true,
-    //     rejectUnauthorized: false // <<<<<<< YOU NEED THIS
-    //   }
-    // },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+      }
+    },
   },
   test: {
     username: process.env.DB_USER || '',
@@ -47,11 +47,11 @@ export const databaseConfig: IDatabaseConfig = {
     logging: false,
     force: true,
     timezone: '+07:00',
-  //   dialectOptions: {
-  //     ssl: {
-  //       require: true,
-  //       rejectUnauthorized: false // <<<<<<< YOU NEED THIS
-  //     }
-  //   },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+      }
+    },
   },
 };

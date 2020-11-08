@@ -23,6 +23,10 @@ export class GroupService {
             {
                 model:Member,
                  as:'members'
+            },
+            {
+                model:Content,
+                 as:'contents'
             }
         ]
     });
