@@ -71,8 +71,13 @@ export class GroupService {
                     order:[
                         ['day','ASC']
                     ]
-                }
+                },
+                {
+                    model:Member,
+                     as:'members'
+                },
               ],
+              
         });
         return user;
     }
