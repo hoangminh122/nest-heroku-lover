@@ -84,7 +84,7 @@ export class Group extends Model<Group> {
     @BelongsToMany(() => FileEntity,() => GroupFile)
     files?: FileEntity[];
 
-    @HasMany(() => Content,'userId')
+    @HasMany(() => Content,'groupId')
     contents: Content[];
 
     @HasMany(() => Member,'groupId')
