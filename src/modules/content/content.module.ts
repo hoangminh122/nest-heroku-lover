@@ -1,5 +1,5 @@
 import { forwardRef, Module } from "@nestjs/common";
-import { ContentEntity } from "src/entities/file/Content";
+import { Content } from "src/entities/file/Content";
 import { ContentController } from "./content.controller";
 import { ContentService } from "./content.service";
 
@@ -8,7 +8,7 @@ import { ContentService } from "./content.service";
     providers:[
         ContentService,{
         provide:'CONTENT_REPOSITORY',
-        useValue:ContentEntity
+        useValue:Content
     }
    ],
     controllers:[ContentController],

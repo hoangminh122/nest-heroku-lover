@@ -1,13 +1,13 @@
 import { UUIDV4 } from 'sequelize';
 import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany, ForeignKey } from 'sequelize-typescript';
-import { UserEntity } from '../user/User';
+import { Group } from '../user/Group';
 
 @Table({
   tableName: 'contents',
   timestamps: false ,
   
 })
-export class ContentEntity extends Model<ContentEntity> {
+export class Content extends Model<Content> {
     @PrimaryKey
     @Column({
         type:DataType.BIGINT,
@@ -16,12 +16,12 @@ export class ContentEntity extends Model<ContentEntity> {
     })
     id?: string;
 
-    @ForeignKey(() =>UserEntity)
+    @ForeignKey(() =>Group)
     @Column({
         type:DataType.UUID,
         defaultValue:UUIDV4
     })
-    userId!:string
+    groupId!:string
     @Column({ allowNull: true, type: DataType.STRING(255) })
     title?: string;
 

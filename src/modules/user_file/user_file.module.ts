@@ -1,19 +1,19 @@
 import { forwardRef, Module } from "@nestjs/common";
-import { UserFile } from "../../entities/user/UserFile";
+import { GroupFile } from "src/entities/user/GroupFile";
 import { UploadModule } from "../upload/upload.module";
 import { UserFileController } from "./user_file.controller";
-import { UserFileService } from "./user_file.service";
+import { GroupFileService } from "./user_file.service";
 
 @Module({
     imports:[forwardRef(() => UploadModule)],
-    providers:[UserFileService,{
-        provide:'USER_FILE_REPOSITORY',
-        useValue:UserFile
+    providers:[GroupFileService,{
+        provide:'GROUP_FILE_REPOSITORY',
+        useValue:GroupFile
     }
    ],
     controllers:[UserFileController],
-    exports:[UserFileService]
+    exports:[GroupFileService]
 })
-export class UserFileModule {
+export class GroupFileModule {
 
 }

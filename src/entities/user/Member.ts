@@ -1,26 +1,40 @@
-import { Column, CreatedAt, DataType, DeletedAt, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { Column, CreatedAt, DataType, DeletedAt, ForeignKey, IsUUID, Model, PrimaryKey, Sequelize, Table } from "sequelize-typescript";
 import { FileEntity } from "../file/Files";
+import { Group } from "./Group";
 
 @Table({
     tableName:'member',
-    timestamps:false
+    timestamps:false,
+    indexes: [{
+        unique: true,
+        fields: ['code']
+      }]
 })
-export class MemberEntity extends Model<FileEntity> {
+export class Member extends Model<Member> {
+    @IsUUID(4)
     @PrimaryKey
     @Column({
-        type:DataType.INTEGER
+        type:DataType.UUID,
+        defaultValue:Sequelize.literal('uuid_generate_v4()')
     })
-    id?: Number 
+    id! :string;
 
-    @Column({allowNull:true,type:DataType.STRING(255)})
+    @Column({
+        field:'avatar',
+        allowNull:true,
+        type:DataType.STRING(255)
+    })
+    avatar: string;
+    
+    @Column({allowNull:false,type:DataType.STRING(255)})
     fullName?:string
 
     @Column({
         field:'date_of_birth',
         allowNull:true,
-        type:DataType.STRING
+        type:DataType.DATEONLY
       })
-    dateOfBirth: string;
+    dateOfBirth: Date;
 
     @Column({
         field:'code',
@@ -36,6 +50,9 @@ export class MemberEntity extends Model<FileEntity> {
     })
     gender?:string
 
+    @ForeignKey(() => Group)
+    @Column({ field: 'group_id', allowNull: true, type: DataType.UUID })
+    groupId!:string
     @Column({
         field:'created_at',
         allowNull:true,

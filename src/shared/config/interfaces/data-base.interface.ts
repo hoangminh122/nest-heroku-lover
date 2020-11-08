@@ -9,6 +9,12 @@ export interface IDatabaseConfigAttributes {
     logging: boolean | Function;
     force :boolean;
     timezone:string;
+    dialectOptions: {
+        ssl: {
+            require: boolean,
+            rejectUnauthorized: boolean // <<<<<<< YOU NEED THIS
+          }
+    }
 }
 
 export interface IDatabaseConfig {

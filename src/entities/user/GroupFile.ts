@@ -7,10 +7,10 @@ import {
     Table,
   } from 'sequelize-typescript';
 import { FileEntity } from '../file/Files';
-import { UserEntity } from './User';
+import { Group } from './Group';
   
-@Table({ tableName: 'user_file', timestamps: false })
-export class UserFile extends Model<UserFile> {
+@Table({ tableName: 'group_file', timestamps: false })
+export class GroupFile extends Model<GroupFile> {
     @Column({
       field: 'file_id',
       primaryKey: true,
@@ -24,7 +24,7 @@ export class UserFile extends Model<UserFile> {
       primaryKey: true,
       type: DataType.STRING,
     })
-    @ForeignKey(() => UserEntity)
+    @ForeignKey(() => Group)
     userId!: string;
   
     @Column({ allowNull: true, type: DataType.STRING(255) })

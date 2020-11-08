@@ -1,7 +1,7 @@
 import { table } from "console";
 import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { MemberEntity } from "./member";
-import { UserEntity } from "./User";
+import { Group } from "./Group";
+import { Member } from "./Member";
 
 @Table({
     tableName:'user_member',timestamps:false
@@ -12,7 +12,7 @@ export class UserMember extends Model<UserMember> {
         primaryKey:true,
         type:DataType.STRING
     })
-    @ForeignKey(()=>MemberEntity)
+    @ForeignKey(()=>Member)
     memberId!:string;
 
     @Column({
@@ -20,7 +20,7 @@ export class UserMember extends Model<UserMember> {
         primaryKey:true,
         type:DataType.STRING
     })
-    @ForeignKey(()=>UserEntity)
+    @ForeignKey(()=>Group)
     userId!:string
 
     @Column({ allowNull: true, type: DataType.STRING(255) })

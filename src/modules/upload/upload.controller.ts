@@ -1,18 +1,19 @@
 import { Body, Controller, Get, Inject, Param, Post, Put, UploadedFiles, UseInterceptors } from "@nestjs/common";
 import { FilesInterceptor } from "@nestjs/platform-express/multer/interceptors/files.interceptor";
-import { ApiBody, ApiConsumes } from "@nestjs/swagger";
+import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { UploadService } from "./upload.service";
 import { multerOptions } from "./config";
 
 
 @Controller('upload')
+@ApiTags('Upload')
 export class UploadController {
     constructor(
         private uploadService: UploadService,
     ) { }
 
     
-    @Post('some/:id/:day')
+    @Post('some/:groupId/:day')
     @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {
@@ -26,13 +27,13 @@ export class UploadController {
         },
     })
     @UseInterceptors(FilesInterceptor('files', null, multerOptions))
-    async uploadFile(@UploadedFiles() file,@Param('id') userId:any,@Param('day') day:any) {
+    async uploadFile(@Param('groupId') groupId:any,@Param('day') day:number,@UploadedFiles() file) {
         console.log(file)
         // console.log(userId)
-        return await this.uploadService.saveFile(file,userId,day);
+        return await this.uploadService.saveFile(file,groupId,day);
     }
 
-    @Post('/user/avatar')
+    @Post('/group/avatar')
     @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {
@@ -79,9 +80,9 @@ export class UploadController {
         
     }
 
-    @Post()
-    saveContent(@Body() content){
+    // @Post()
+    // saveContent(@Body() content){
 
-    }
+    // }
 
 }

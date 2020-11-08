@@ -1,16 +1,16 @@
 import { Get, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { UserFile } from "../../entities/user/UserFile";
+import { GroupFile } from "../../entities/user/GroupFile";
 import { UserFileDTO } from "./dto/userFile.dto";
 
 @Injectable()
-export class UserFileService {
+export class GroupFileService {
    
     constructor(
-        @Inject('USER_FILE_REPOSITORY') private userFileRepository :typeof UserFile
+        @Inject('GROUP_FILE_REPOSITORY') private groupFileRepository :typeof GroupFile
     ) {
 
     }
     async saveFile(userFile: UserFileDTO){
-      return await this.userFileRepository.create(userFile);
+      return await this.groupFileRepository.create(userFile);
     }
 }

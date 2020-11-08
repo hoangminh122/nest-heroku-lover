@@ -1,22 +1,24 @@
 import { UUIDV4 } from 'sequelize';
-import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
-import { ContentEntity } from '../file/Content';
+import { Column, Model, Table, HasMany, DataType, CreatedAt, UpdatedAt, DeletedAt, IsUUID, PrimaryKey, BelongsToMany, Sequelize } from 'sequelize-typescript';
+import { Content } from '../file/Content';
 import { FileEntity } from '../file/Files';
-import { UserFile } from './UserFile';
+import { GroupFile } from './GroupFile';
+import { Member } from './Member';
 
 @Table({
-  tableName: 'users',
+  tableName: 'group',
   indexes: [{
     unique: true,
     fields: ['code']
   }] 
 })
-export class UserEntity extends Model<UserEntity> {
+
+export class Group extends Model<Group> {
     @IsUUID(4)
     @PrimaryKey
     @Column({
         type:DataType.UUID,
-        defaultValue:UUIDV4
+        defaultValue:Sequelize.literal('uuid_generate_v4()')
     })
     id! :string;
 
@@ -28,46 +30,33 @@ export class UserEntity extends Model<UserEntity> {
     avatar: string;
 
     @Column({
+      field:'full_name',
+      allowNull:true,
+      type:DataType.STRING(255)
+    })
+    fullName: string;
+
+    @Column({
       field:'code',
       allowNull:false,
       type:DataType.STRING(20)
-  })
-  code: string;
-
-    @Column({
-        field:'full_name',
-        allowNull:false,
-        type:DataType.STRING(50)
     })
-    fullName:string;
+    code: string;
 
     @Column({
       field:'own_name',
       allowNull:true,
-      type:DataType.STRING(50)
+      type:DataType.BIGINT
     })
-    ownName: string;
-
-    @Column({
-      field:'gender',
-      allowNull:true,
-      type:DataType.STRING(50)
-    })
-    gender: string;
+    ownId: number;
 
     @Column({
       field:'day_start',
       allowNull:true,
-      type:DataType.STRING(255)
+      type:DataType.STRING(255),
+      defaultValue:Sequelize.literal('CURRENT_TIMESTAMP')
     })
-    dayStart: string;
-    
-    @Column({
-      field:'date_of_birth',
-      allowNull:false,
-      type:DataType.STRING
-    })
-    dateOfBirth: string;
+    dayStart: Date;
 
     @Column({
       field: 'created_at',
@@ -92,10 +81,14 @@ export class UserEntity extends Model<UserEntity> {
     deletedAt?: Date;
 
     
-    @BelongsToMany(() => FileEntity,() => UserFile)
+    @BelongsToMany(() => FileEntity,() => GroupFile)
     files?: FileEntity[];
 
-    @HasMany(() => ContentEntity,'userId')
-    contents: ContentEntity[];
+    @HasMany(() => Content,'groupId')
+    contents: Content[];
+
+    @HasMany(() => Member,'groupId')
+    members:Member[]
+    
 
 }
