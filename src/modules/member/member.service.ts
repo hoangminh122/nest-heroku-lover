@@ -15,33 +15,46 @@ export class MemberService {
         private memberModel: typeof Member,
         @Inject('GroupsRepository')
         private groupModel: typeof Group
-    ){ }
+    ) { }
 
-    async addMemberToGroup(groupUser:string,memberId:string){
+    async getInforMember(id: string): Promise<Member> {
+        let member = await this.memberModel.findOne({
+            where: {
+                id
+            }
+        });
+        return member;
+    }
+
+    async addMemberToGroup(groupUser: string, memberId: string) {
 
         return await this.unitOfWork.scope(async () => {
 
-            const group = await this.groupModel.findOne({where:{
-                id:groupUser
-            }});
-            if(!group) {
+            const group = await this.groupModel.findOne({
+                where: {
+                    id: groupUser
+                }
+            });
+            if (!group) {
                 throw new HttpException(
                     {
-                        status:HttpStatus.NOT_FOUND,
-                        error:'Group Not Found'
+                        status: HttpStatus.NOT_FOUND,
+                        error: 'Group Not Found'
                     },
                     HttpStatus.NOT_FOUND
                 )
             }
 
-            let member :any = await this.memberModel.findOne({where:{
-                id:memberId
-            }});
-            if(!member) {
+            let member: any = await this.memberModel.findOne({
+                where: {
+                    id: memberId
+                }
+            });
+            if (!member) {
                 throw new HttpException(
                     {
-                        status:HttpStatus.NOT_FOUND,
-                        error:'Member Not Found'
+                        status: HttpStatus.NOT_FOUND,
+                        error: 'Member Not Found'
                     },
                     HttpStatus.NOT_FOUND
                 )
@@ -50,21 +63,21 @@ export class MemberService {
             member.groupId = groupUser;
             const memberCover = JSON.parse(JSON.stringify(member));
             //update member with groupId
-            await this.memberModel.update(memberCover,{where:{id:memberId}});
+            await this.memberModel.update(memberCover, { where: { id: memberId } });
             return true;
         })
     }
 
-    async createMember(data){
-        return await this.unitOfWork.scope(async()=>{
+    async createMember(data) {
+        return await this.unitOfWork.scope(async () => {
             return await this.memberModel.create(data);
             // return true;
         });
     }
 
-    async updateMember(data,id){
-        return await this.unitOfWork.scope(async()=>{
-            await this.memberModel.update(data,{where:{id}});
+    async updateMember(data, id) {
+        return await this.unitOfWork.scope(async () => {
+            await this.memberModel.update(data, { where: { id } });
             return true;
         });
     }
