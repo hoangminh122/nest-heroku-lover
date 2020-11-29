@@ -38,6 +38,7 @@
     "dotenv": "8.2.0",
     "express-form-data": "2.0.14",
     "fastify-swagger": "3.4.0",
+    "momentjs": "^2.0.0",
     "multer": "1.4.2",
     "pg": "8.3.2",
     "reflect-metadata": "0.1.13",

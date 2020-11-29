@@ -1,6 +1,8 @@
 import { Inject, Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { Group } from "src/entities/user/Group";
 import { GroupService } from "../group/group.service";
+import * as moment from "moment";
+
 
 @Injectable()
 export class DayLoveService {
@@ -25,22 +27,20 @@ export class DayLoveService {
                 }
             })
 
-            console.log(new Date(user.dayStart).getFullYear())
+            const dayStart = moment(user.dayStart);
+            const dayEnd = moment(new Date());
+            console.log(dayStart,"sadhasgd",dayEnd,"sdfhsdg",dayEnd.dayOfYear()-dayStart.dayOfYear())
+            return {
+                dayEnd,
+                dayStart,
+                dayLove:dayEnd.dayOfYear()-dayStart.dayOfYear()
+            };
             // if(!user.dayStart) {
             //     throw new HttpException({
             //         status:HttpStatus.NOT_FOUND,
-            //         error:'Not Found'
+            //         error:'Not Found''
             //     },HttpStatus.NOT_FOUND)
             // }
-            const yearLover = new Date().getFullYear() - new Date(user.dayStart).getFullYear();
-            const monthLover = new Date().getMonth() - new Date(user.dayStart).getMonth();
-            const dayLover = new Date().getDate() - new Date(user.dayStart).getDate();
-            console.log("year",yearLover,"  ",monthLover,"  ",)
-            return {
-                yearLover,
-                monthLover,
-                dayLover
-            }
 
         } catch(e){
             console.log(e)
